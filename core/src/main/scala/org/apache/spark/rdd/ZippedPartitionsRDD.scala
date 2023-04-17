@@ -17,6 +17,8 @@
 
 package org.apache.spark.rdd
 
+import org.apache.spark.errors.SparkCoreErrors
+
 import java.io.{IOException, ObjectOutputStream}
 
 import scala.reflect.ClassTag
@@ -54,8 +56,7 @@ private[spark] abstract class ZippedPartitionsBaseRDD[V: ClassTag](
   override def getPartitions: Array[Partition] = {
     val numParts = rdds.head.partitions.length
     if (!rdds.forall(rdd => rdd.partitions.length == numParts)) {
-      throw new IllegalArgumentException(
-        s"Can't zip RDDs with unequal numbers of partitions: ${rdds.map(_.partitions.length)}")
+      throw SparkCoreErrors.rddUnequalPartitionsSizeError(rdds.map(_.partitions.length))
     }
     Array.tabulate[Partition](numParts) { i =>
       val prefs = rdds.map(rdd => rdd.preferredLocations(rdd.partitions(i)))

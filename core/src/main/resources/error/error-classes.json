@@ -2012,6 +2012,38 @@
     },
     "sqlState" : "42605"
   },
+  "ILLEGAL_ARGUMENT": {
+    "message": [
+      "Invalid argument"
+    ],
+    "subClass" : {
+      "BUCKET_LENGTH_TOO_SMALL": {
+        "message": [
+          "Bucket array must have at least two elements"
+        ]
+      },
+      "PARTITION_SIZE": {
+        "message": [
+          "Positive number of partitions required, given: <numPartitions>"
+        ]
+      },
+      "UNEQUAL_PARTITIONS_SIZE": {
+        "message": [
+          "Can't zip RDDs with unequal numbers of partitions: <partitionsSize>"
+        ]
+      }
+    }
+  },
+  "TASK_NOT_SERIALIZABLE": {
+    "message": [
+      "Task not serializable"
+    ]
+  },
+  "ILLEGAL_STATE": {
+    "message": [
+      "Subprocess exited with status <exitStatus>. Command run: <command>."
+    ]
+  },
   "_LEGACY_ERROR_TEMP_0001" : {
     "message" : [
       "Invalid InsertIntoContext."

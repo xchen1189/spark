@@ -171,7 +171,7 @@ class DoubleRDDFunctions(self: RDD[Double]) extends Logging with Serializable {
       buckets: Array[Double],
       evenBuckets: Boolean = false): Array[Long] = self.withScope {
     if (buckets.length < 2) {
-      throw new IllegalArgumentException("buckets array must have at least two elements")
+      throw SparkCoreErrors.rddIllegalBucketSizeError()
     }
     // The histogramPartition function computes the partial histogram for a given
     // partition. The provided bucketFunction determines which bucket in the array

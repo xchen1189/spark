@@ -466,4 +466,39 @@ private[spark] object SparkCoreErrors {
         "requestedBytes" -> requestedBytes.toString,
         "receivedBytes" -> receivedBytes.toString).asJava)
   }
+
+  def rddIllegalPartitionNumError(inputPartitionNumber: Int): Throwable = {
+    new SparkException(
+      errorClass = "ILLEGAL_ARGUMENT.PARTITION_SIZE",
+      messageParameters = Map("inputPartitionNumber" -> s"$inputPartitionNumber"),
+      cause = null)
+  }
+
+  def rddIllegalBucketSizeError(): Throwable = {
+    new SparkException(
+      errorClass = "ILLEGAL_ARGUMENT.BUCKET_LENGTH_TOO_SMALL",
+      messageParameters = null,
+      cause = null)
+  }
+
+  def rddUnequalPartitionsSizeError(partitionsSize: Seq[Int]): Throwable = {
+    new SparkException(
+      errorClass = "ILLEGAL_ARGUMENT.UNEQUAL_PARTITIONS_SIZE",
+      messageParameters = Map("partitionsSize" -> partitionsSize.toString),
+      cause = null)
+  }
+
+  def rddTaskNotSerializableError(e: Throwable): Throwable = {
+    new SparkException(
+      errorClass = "TASK_NOT_SERIALIZABLE",
+      messageParameters = null,
+      cause = e)
+  }
+
+  def rddIllegalStateError(command: String, existStatus: Int): Throwable = {
+    new SparkException(
+      errorClass = "ILLEGAL_STATE",
+      messageParameters = Map("command" -> command, "existStatus" -> existStatus.toString),
+      cause = null)
+  }
 }
