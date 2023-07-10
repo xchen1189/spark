@@ -684,7 +684,7 @@ public class JavaAPISuite implements Serializable {
   }
 
   @Test
-  public void javaDoubleRDDHistoGram() {
+  public void javaDoubleRDDHistogram() {
     JavaDoubleRDD rdd = sc.parallelizeDoubles(Arrays.asList(1.0, 2.0, 3.0, 4.0));
     // Test using generated buckets
     Tuple2<double[], long[]> results = rdd.histogram(2);

@@ -198,8 +198,7 @@ private[spark] class PipedRDD[T: ClassTag](
           val exitStatus = proc.waitFor()
           cleanup()
           if (exitStatus != 0) {
-            throw new IllegalStateException(s"Subprocess exited with status $exitStatus. " +
-              s"Command ran: " + command.mkString(" "))
+            throw SparkCoreErrors.rddIllegalStateError(command.mkString(" "), exitStatus)
           }
           false
         }
